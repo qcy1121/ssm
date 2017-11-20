@@ -23,6 +23,14 @@
 
 	<dependencies>
 
+		<!-- servlet-api -->
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-servlet-api</artifactId>
+			<version>8.0.32</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- spring mvc -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -245,6 +253,34 @@
 				</configuration>
 			</plugin>
 
+			<!-- 设置前端js css压缩混淆，非前后端分离 -->
+			<plugin>
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>yuicompressor-maven-plugin</artifactId>
+				<version>1.3.0</version>
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>compress</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<skip>false</skip>
+					<jswarn>false</jswarn>
+					<force>false</force>
+					<nosuffix>true</nosuffix>
+					<disableOptimizations>false</disableOptimizations>
+					<linebreakpos>7999</linebreakpos>
+					<force>true</force>
+					<encoding>utf-8</encoding>
+					<excludes>
+						<exclude>**/*.min.js</exclude>
+						<exclude>**/*.min.css</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
 
 
 		</plugins>

@@ -16,12 +16,15 @@
 			<!-- <param-value>/WEB-INF/applicationContext.xml</param-value>   -->
 		</param-value>
 	</context-param>
+	<!--ServletContextListener,设置cdnPath和版本号等 -->
+	<listener>
+		<listener-class>com.zsx.listener.AppContextListener</listener-class>
+	</listener>
 
 	<listener>
 		<description>spring监听器</description>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
 	<!-- 防止spring内存溢出监听器 -->
 	<listener>
 		<description>Introspector缓存清除监听器</description>
