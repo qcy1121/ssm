@@ -54,14 +54,13 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 加载全局的配置文件 -->
-		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
 		
 		<!-- 自动扫描mapping.xml文件 -->
 		<!-- <property name="mapperLocations" value="classpath:com/zsx/web/mapping/*.xml"></property> -->
 		<property name="mapperLocations">
 			<list>
 				<value>classpath:com/zsx/web/mapping/*.xml</value>
-				<value>classpath:mybatis/mapper/*.xml</value>
 			</list>
 		</property>
 		
@@ -70,7 +69,12 @@
 	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->  
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
         <property name="basePackage" value="com.zsx.web.dao,com.weshop.dao" />
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>  
+		<!--注 意 , 没 有 必 要 去 指 定 SqlSessionFactory 或 SqlSessionTemplate ,
+		因为 MapperScannerConfigurer 将会创建 MapperFactoryBean,之后自动装配。
+		但是,如果你使 用了一个 以上的 DataSource ,那 么自动 装配可 能会失效 。
+		这种 情况下 ,你可 以使用 sqlSessionFactoryBeanName 或 sqlSessionTemplateBeanName 属性来设置正确的 bean 名 称来使用。
+		这就是它如何来配置的,注意 bean 的名称是必须的,而不是 bean 的引用,因 此,value 属性在这里替代通常的 ref:-->
+        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>  -->
     </bean>
 
 	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->  
